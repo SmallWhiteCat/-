@@ -1,0 +1,29 @@
+n,w = map(int, input().split())
+arr = [int(i) for i in input().split()]
+arr.sort()
+def bag(num, k, set_, arr_, w_):
+    if num == 0:
+        if w_ >= 0:
+            return 1
+        return 0
+    res = 0
+    n = len(arr_)
+    for i in range(n):
+        if num > 0 and w_ < 0:
+            break
+        tmp = arr_[:i]
+        tmp.extend(arr_[i+1:])
+        if tuple(tmp) not in set_:
+            if len(tmp) == len(arr) - k:
+                set_.add(tuple(tmp))
+            res += bag(num-1, k, set_, tmp, w_-arr_[i])
+    return res
+res = 1
+for i in range(1, n+1):
+    tmp = 0
+    [tmp+arr[i_] for i_ in range(i)]
+    if tmp > w:
+        break
+    res += bag(i, i, set(), arr, w)
+print(res)
+#print(res)
