@@ -1,0 +1,19 @@
+n,w = map(int, input().split())
+arr = [int(i) for i in input().split()]
+arr.sort()
+res = [1]
+def bag_dfs(ini, w_, res, visit_, n_, arr_):
+    if ini == n_:
+        return
+    for i in range(ini, n_):
+        if visit_[i]==0 and w_>arr_[i]:
+            visit_[i] = 1
+            res[0] += 1
+            bag_dfs(i+1, w_-arr[i], res, visit_, n_, arr_)
+            visit_[i] = 0
+if sum(arr) <= w:
+    print(2**n)
+else:
+    visit = [0]*n
+    bag_dfs(0, w, res, visit, n, arr)
+    print(res[0])
